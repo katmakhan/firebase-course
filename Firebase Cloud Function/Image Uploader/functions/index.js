@@ -24,63 +24,31 @@ var gcconfig = {
 const {Storage} = require('@google-cloud/storage');
 const gcs = new Storage(gcconfig);
 
-
-// exports.onFileChange = functions.storage.object().onChange(event => {
-//   const object = event.data;
-//   const bucket = object.bucket;
-//   const contentType = object.contentType;
-//   const filePath = object.name;
-//   console.log("File change detected, function execution started");
-
-//   if (object.resourceState === "not_exists") {
-//     console.log("We deleted a file, exit...");
-//     return;
-//   }
-
-//   if (path.basename(filePath).startsWith("resized-")) {
-//     console.log("We already renamed that file!");
-//     return;
-//   }
-
-//   const destBucket = gcs.bucket(bucket);
-//   const tmpFilePath = path.join(os.tmpdir(), path.basename(filePath));
-//   const metadata = { contentType: contentType };
-//   return destBucket
-//     .file(filePath)
-//     .download({
-//       destination: tmpFilePath
-//     })
-//     .then(() => {
-//       return spawn("convert", [tmpFilePath, "-resize", "500x500", tmpFilePath]);
-//     })
-//     .then(() => {
-//       return destBucket.upload(tmpFilePath, {
-//         destination: "resized-" + path.basename(filePath),
-//         metadata: metadata
-//       });
-//     });
-// });
-
 exports.uploadFile = functions.https.onRequest((req, res) => {
-    //Allowing CROSS SITE
+
+  //Allowing CROSS SITE
   cors(req, res, () => {
     if (req.method !== "POST") {
       return res.status(500).json({
         message: "Not allowed"
       });
     }
-    console.log("Starting BusBOY");
 
+    console.log("Starting BusBOY");
     const busboy = Busboy({ headers: req.headers});
     let uploadData = null;
-
-    console.log("Starting Parsing Image");
     
     //File parsing
     busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
+
         // Firebase cloudfunction will have some tmpdirectory tmpdir
         // It will be cleaned up after execution
-      const filepath = path.join(os.tmpdir(), filename);
+      console.log("File function reached ");
+
+      console.log("Temp folder is "+os.tmpdir());
+      console.log("File name is "+filename.filename);
+
+      const filepath = path.join(os.tmpdir(),filename.filename);
 
       console.log("Location of file is "+filepath);
       uploadData = { file: filepath, type: mimetype };
@@ -89,17 +57,19 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
       //Writing file to storage
       file.pipe(fs.createWriteStream(filepath));
 
+      //Extra Details such as limit error
       file.on('limit', () => {
         console.log("Reached size limit");
-        debugLog(options, `Size limit reached for ${field}->${filename}, bytes:${getFileSize()}`);
+        debugLog(options, `Size limit reached for ${field}->${filename.filename}, bytes:${getFilesizeInBytes(filename)}`);
       });
         file.on('end', () => {
-        console.log("File size is");
-        const size = getFileSize();
+        const size = getFilesizeInBytes(filename.filename);
+        console.log("File size is "+size+" bytes");
        });
        file.on('error', (err) => {
         console.log("File format error");
        });
+
     });
 
     //For Form data Listener
@@ -107,8 +77,6 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
 
     // });
 
-
-    
     // Finishes the whole process, only upload after that
     busboy.on("finish", () => {
 
@@ -117,9 +85,10 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
         // gs://b-community-7862a.appspot.com
         // Remove the gs String
 
-        console.log("Finished BusBoy");
+      console.log("Finished BusBoy");
+      var your_project_id="b-community-7862a.appspot.com";
 
-      const bucket = gcs.bucket("b-community-7862a.appspot.com");
+      const bucket = gcs.bucket(your_project_id);
       console.log("Uploading Image to firebase");
       
       bucket
@@ -133,12 +102,15 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
         })
         .then(() => {
             // Success
+          console.log("Uploaded Successfully");
           res.status(200).json({
             message: "It worked!"
           });
         })
         .catch(err => {
             // Error
+            console.log("Error while uploading");
+
           res.status(500).json({
             error: err
           });
@@ -146,8 +118,15 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
     });
 
     //End the parsing
+    console.log("End Parsing");
     busboy.end(req.rawBody);
+
   });
-
-
 });
+
+//Finding the file size from the filename
+function getFilesizeInBytes(filename) {
+  var stats = fs.statSync(filename);
+  var fileSizeInBytes = stats.size;
+  return fileSizeInBytes;
+}
