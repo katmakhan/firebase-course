@@ -75,18 +75,31 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
     let uploadData = null;
 
     console.log("Starting Parsing Image");
+    
     //File parsing
     busboy.on("file", (fieldname, file, filename, encoding, mimetype) => {
         // Firebase cloudfunction will have some tmpdirectory tmpdir
         // It will be cleaned up after execution
       const filepath = path.join(os.tmpdir(), filename);
 
-      console.log("Location is "+filepath);
+      console.log("Location of file is "+filepath);
       uploadData = { file: filepath, type: mimetype };
 
-      console.log("Writing to file storage");
+      console.log("Writing to temp file storage");
       //Writing file to storage
       file.pipe(fs.createWriteStream(filepath));
+
+      file.on('limit', () => {
+        console.log("Reached size limit");
+        debugLog(options, `Size limit reached for ${field}->${filename}, bytes:${getFileSize()}`);
+      });
+        file.on('end', () => {
+        console.log("File size is");
+        const size = getFileSize();
+       });
+       file.on('error', (err) => {
+        console.log("File format error");
+       });
     });
 
     //For Form data Listener
@@ -95,7 +108,7 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
     // });
 
 
-    console.log("Finished BusBoy");
+    
     // Finishes the whole process, only upload after that
     busboy.on("finish", () => {
 
@@ -104,8 +117,11 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
         // gs://b-community-7862a.appspot.com
         // Remove the gs String
 
-    console.log("Uploading Image");
+        console.log("Finished BusBoy");
+
       const bucket = gcs.bucket("b-community-7862a.appspot.com");
+      console.log("Uploading Image to firebase");
+      
       bucket
         .upload(uploadData.file, {
           uploadType: "media",
@@ -132,4 +148,6 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
     //End the parsing
     busboy.end(req.rawBody);
   });
+
+
 });
