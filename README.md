@@ -1,2 +1,32 @@
-# firebase-free-course
-This will help you master the firebase functions like Realtime Database, Cloud Firestore, Firebase Hosting and Functions
+# Firebase Syllabus
+
+- Realtime Database
+  - Billed based on data transfer rather than document numbers
+  - Can do simples queries
+  - Good for real time data storage and retrival
+  - Ideal for stock trading data and real time monitoring systems for IOT
+ - Cloud Firestore (Billed based on number of documents
+  - Billed based on number of documents
+  - Can do complex queries
+  - Good for storing relational database
+  - Ideal for storing review informations, complex data models
+- Firebase Hosting
+  - Completely free for medium level traffic
+  - Easy setup with github actions
+- Remote Configs
+  - Change configs for the mobile apps without any updates
+  - Not ideal for initial settingup
+  - Takes time to effect 100% of rollout
+- Cloud Functions
+  - Compression of image
+  - Automatic Backups
+  - Automatic summation
+- Push Messages
+  - To send notification to web and mobile platforms
+  - With Image headers
+  - With Unique notification sound
+  - With click actions
+- In-App Messages
+  - For in app popup for user engagement
+  - Ideal for promotional or new feature updates
+
