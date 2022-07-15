@@ -30,3 +30,9 @@
 
 - Choosing `Installing Dependencies`
 	- Choose `Y` to `Install` all the necessary `dependencies`
+	
+---
+### After completion you will see this message in the command prompt
+```console
++  Firebase initialization complete!
+```
