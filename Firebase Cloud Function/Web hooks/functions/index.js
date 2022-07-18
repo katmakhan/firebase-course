@@ -32,7 +32,12 @@ admin.initializeApp({
 
 exports.fyers_api = functions.runWith(runtimeOpts).https.onRequest(async (request, response) => {
 
+	//Query Parameter of the request
+	//?s=ok&code=200&auth_code=xxxxxx
     const requestBody=request.query;
+	
+	//Body of the https request
+	//const requestBody=request.body;
     const s_code=requestBody.code;
     const status=requestBody.s;
     console.log("Request Body",requestBody);
