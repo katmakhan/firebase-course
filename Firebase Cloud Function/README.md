@@ -32,13 +32,18 @@
 	- Choose `Y` to `Install` all the necessary `dependencies`
 	
 ---
+### If `Initialise Fails`, Login using
+``` console
+firebase login
+```
+
 ### After completion you will see this message in the command prompt
 ```console
 +  Firebase initialization complete!
 ```
 
 ---
-### Intialise Emulators for testing
+### Intialise `Emulators` for `testing`
 
 ```console
 firebase emulators init
@@ -47,12 +52,33 @@ firebase emulators init
 firebase emulators:start
 ```
 
-### get url for the http endpoint at
+### Deploy to Firebase
+```console
+firebase deploy --only functions
+```console
+
+or 
+
+```console
+firebase deploy --only functions:func_AddSomething,functions:func_Anotherfunction
+```console
+
+
+### get `url` for the `http endpoint` at
 
 ```console
 +functions[us-central1-getmemberdetails]: http function initialized (http://localhost:5001/b-community-7862a/us-central1/getmemberdetails).
 ```
 ---
+
+### If you `already` have some `functions deployed`
+Firebase will ask you, Choose `N` when you want to keep old functions
+
+```console
+? Would you like to proceed with deletion? Selecting no will continue the rest of the deployments. (y/n)
+```
+
+
 
 ### Change the rules of Firebase Storage
 

@@ -7,7 +7,7 @@ firebase init
 
 ### Intitalise the Emulators using
 ```console
-firebase emulators init
+firebase init emulators
 ```
 
 ### Start the emulators using
