@@ -48,6 +48,7 @@ firebase login
 ```console
 firebase emulators init
 ```
+
 ```console
 firebase emulators:start
 ```
@@ -55,13 +56,13 @@ firebase emulators:start
 ### Deploy to Firebase
 ```console
 firebase deploy --only functions
-```console
+```
 
 or 
 
 ```console
 firebase deploy --only functions:func_AddSomething,functions:func_Anotherfunction
-```console
+```
 
 
 ### get `url` for the `http endpoint` at
