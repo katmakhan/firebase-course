@@ -66,4 +66,20 @@ def __init__(
   self, credential=None, session=None, base_url='', headers=None,
   retries=1):
 ```
+---
+OR
+Change the `requests` version to 
+```console
+2.11.1
+```
+
+```bash
+pip uninstall requests
+```
+
+```bash
+pip install requests
+```
+
+
 
