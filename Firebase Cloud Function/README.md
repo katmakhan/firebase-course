@@ -24,7 +24,7 @@
 	Here we choose `javascript`, If you are comfortable with typescript choose that
 	- `Javascript`
 	- `Typescript'
-
+	
 - Choosing `Enforced Style`
 	- Choose `N` for not using `ESLint` for initial time being
 
