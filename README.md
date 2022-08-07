@@ -29,4 +29,41 @@
 - In-App Messages
   - For in app popup for user engagement
   - Ideal for promotional or new feature updates
+  
+ ---
+ 
+ ### Installing Firebase-Admin in Python
+ ```console
+ pip install firebase-admin
+ ```
+ 
+ ---
+ 
+ ### Debugging the installation error
+ 
+ If there is error like when installing any other dependencies
+ ```console
+ File "C:\Users\<NAME>\Anaconda3\lib\site-packages\firebase_admin\_http_client.py", line 34, in <module>
+    raise_on_status=False, backoff_factor=0.5, **_ANY_METHOD)
+    TypeError: __init__() got an unexpected keyword argument 'status'
+ ```
+ 
+Just do the following steps
+- Go the following path
+  ```console
+  C:\Users\<NAME>\Anaconda3\lib\site-packages\firebase_admin_http_client.py
+  ```
+- Comment the following lines from firebase_admin_http_client.py:
+  ```console
+   #from requests.packages.urllib3.util import retry
+   #DEFAULT_RETRY_CONFIG = retry.Retry(
+   #connect=1, read=1, status=4, status_forcelist=[500, 503],
+   #raise_on_status=False, backoff_factor=0.5)
+  ```
+- Also Change the init parameter as follows
+```console
+def __init__(
+  self, credential=None, session=None, base_url='', headers=None,
+  retries=1):
+```
 
