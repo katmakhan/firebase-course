@@ -64,7 +64,7 @@ Just do the following steps
 ```console
 def __init__(
   self, credential=None, session=None, base_url='', headers=None,
-  retries=1,timeout=DEFAULT_TIMEOUT_SECONDS):
+  retries=1,timeout=120):
 ```
 ---
 OR
