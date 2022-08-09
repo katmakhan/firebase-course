@@ -1,35 +1,42 @@
 # Firebase Syllabus
 
-- Realtime Database
+- [Realtime Database](https://github.com/katmakhan/firebase-course/tree/master/Firebase%20Realtime%20Database)
   - Billed based on data transfer rather than document numbers
   - Can do simples queries
   - Good for real time data storage and retrival
   - Ideal for stock trading data and real time monitoring systems for IOT
- - Cloud Firestore (Billed based on number of documents
+- [Cloud Firestore](https://github.com/katmakhan/firebase-course/tree/master/FIrebase%20Cloud%20Firestore) (Billed based on number of documents
   - Billed based on number of documents
   - Can do complex queries
   - Good for storing relational database
   - Ideal for storing review informations, complex data models
-- Firebase Hosting
+- [Firebase Hosting](https://github.com/katmakhan/firebase-course/tree/master/FIrebase%20Hosting)
   - Completely free for medium level traffic
   - Easy setup with github actions
-- Remote Configs
+- [Remote Configs](https://github.com/katmakhan/firebase-course/tree/master/Firebase%20Remote%20Config)
   - Change configs for the mobile apps without any updates
   - Not ideal for initial settingup
   - Takes time to effect 100% of rollout
-- Cloud Functions
+- [Cloud Functions](https://github.com/katmakhan/firebase-course/tree/master/Firebase%20Cloud%20Function)
   - Compression of image
   - Automatic Backups
   - Automatic summation
-- Push Messages
+- [Push Messages](https://github.com/katmakhan/firebase-course/tree/master/Firebase%20Push%20Notification)
   - To send notification to web and mobile platforms
   - With Image headers
   - With Unique notification sound
   - With click actions
-- In-App Messages
+- [In-App Messages](https://github.com/katmakhan/firebase-course/tree/master/Firebase%20In-APP%20Message)
   - For in app popup for user engagement
   - Ideal for promotional or new feature updates
-  
+- [Dynamic Links](https://github.com/katmakhan/firebase-course/tree/master/FIrebase%20Dynamic%20Links)
+  - For using for referal links
+  - Opening dedicated pages or posts from app
+- [Security Rules](https://github.com/katmakhan/firebase-course/tree/master/Firebase%20Security%20Rules)
+  - To secure the database
+  - Rules to secure data using admin roles
+  - Rules to minimise data extraction
+
  ---
  
  ### Installing Firebase-Admin in Python
