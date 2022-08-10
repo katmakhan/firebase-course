@@ -1,12 +1,16 @@
-### Create `Private KEY`
+### Create `Private KEY` for `Firebase ADMIN SDK for NODE`
+- To generate a private key file for your service account
+- In the Firebase console, open Settings > [Service Accounts](https://console.firebase.google.com/project/_/settings/serviceaccounts/adminsdk).
+- Click `Generate New Private Key`, for `Node Js` 
+- Then confirm by clicking Generate Key.
+- Securely store the JSON file containing the key.
+- Because the `cloud function` we are writing is in `javascript`
 
-- Firebase > Project Settings > Service accounts > Fierbase ADMIN SDK
-- Then click on `Generate new private key` for node.js
-- Because the cloud function we are writing is in javascript
+For mode details checkout [Firebase admin setup](https://firebase.google.com/docs/admin/setup)
 
 
 ### Copy the `package names`
-- Copy the `package.json` with latest modules
+- Copy the `package.json` in the repo
 - If its not working, Kindly update them with latest modules
 - go to npm website to find the latest vesrions of the modules
 
@@ -38,10 +42,21 @@ firebase deploy --only functions
 ```
 After deploying you will get the `http endpoint` from the firebase console
 
+For more details [Firebase Get Started](https://firebase.google.com/docs/functions/get-started)
+
 ### Testing
 Check this free opensource api testing tool to test the api endpoint.
 https://hoppscotch.io
+https://postman.com
+
+
 
 - `Method` as `POST`
 - `BODY REQUEST` should be set as `form-data`
+- Choose the `image file` as an `argument`
+- Click `send`
+
+For more details
+https://stackoverflow.com/questions/16015548/how-to-send-multipart-form-data-request-using-postman
+
 ---
