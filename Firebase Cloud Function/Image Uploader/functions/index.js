@@ -82,7 +82,7 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
 
         // Firebase storage, Inside the console itself
         // Copy the folder location
-        // gs://b-community-7862a.appspot.com
+        // gs://<project_id>.appspot.com
         // Remove the gs String
 
       console.log("Finished BusBoy");
