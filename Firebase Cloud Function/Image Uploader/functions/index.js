@@ -15,7 +15,7 @@ const fs = require("fs");
 
 var gcconfig = {
     // Get the project ID from firebaserc
-  projectId: "b-community-7862a",
+  projectId: "<project_id>",
 //   Write the name of the file in the root director which contains the private key of firebase-admin-sdk
   keyFilename: "firebase-admin-sdk.json"
 };
@@ -82,11 +82,11 @@ exports.uploadFile = functions.https.onRequest((req, res) => {
 
         // Firebase storage, Inside the console itself
         // Copy the folder location
-        // gs://b-community-7862a.appspot.com
+        // gs://<project_id>.appspot.com
         // Remove the gs String
 
       console.log("Finished BusBoy");
-      var your_project_id="b-community-7862a.appspot.com";
+      var your_project_id="<project_id>.appspot.com";
 
       const bucket = gcs.bucket(your_project_id);
       console.log("Uploading Image to firebase");
