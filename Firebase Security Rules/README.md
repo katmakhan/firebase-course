@@ -89,3 +89,31 @@ service firebase.storage {
 }
 }
 ```
+
+OR
+### Sepearte rules for create,update and delete
+```console
+service firebase.storage {
+  match /b/{bucket}/o {
+    // A read rule can be divided into read and list rules
+    match /images/{imageId} {
+      // Applies to single file read requests
+      allow get: if <condition>;
+      // Applies to list and listAll requests (Rules Version 2)
+      allow list: if <condition>;
+
+    // A write rule can be divided into create, update, and delete rules
+    match /images/{imageId} {
+      // Applies to writes to file contents
+      allow create: if <condition>;
+
+      // Applies to updates to (pre-existing) file metadata
+      allow update: if <condition>;
+
+      // Applies to delete operations
+      allow delete: if <condition>;
+    }
+  }
+ }
+}
+```
