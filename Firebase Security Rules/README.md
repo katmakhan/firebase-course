@@ -42,13 +42,13 @@
     match /b/{bucket}/o {
        // Explicitly define rules for the 'NewFolder' pattern
       match /NewFolder/{allPaths}{
-        allow  write: if request.auth != null;
-        allow  read: if request.auth == null;
+        allow  write: if request.auth != null;    // Only auth users can write
+        allow  read: if request.auth == null;   //Publically Readable
       }
       // This will be defined for everything else
       match /{allPaths=**} {
-        allow  write: if request.auth != null;
-        allow  read: if request.auth != null;
+        allow  write: if request.auth != null;  // Only auth users can write
+        allow  read: if request.auth != null;  // Only auth users can read
       }
     }
   }
@@ -77,8 +77,8 @@
     service firebase.storage {
       match /b/{bucket}/o {
         match /{allPaths=**} {
-          allow  write: if request.auth != null;
-          allow  read: if request.auth == null;
+          allow  write: if request.auth != null;   // Only auth users can write
+          allow  read: if request.auth == null;  // Publical read
         }
       }
     }
