@@ -34,7 +34,7 @@
 - Limiting with specific paths: METHOD 1
   - Giving specific access to specific paths
   - Write the overall rule down below.
-  - If you write the `specific path` rule on `TOP`, It won't work
+  - If you write the `specific path` rule on `BOTTOM`, It won't work
 
   ```console
   rules_version = '2';
