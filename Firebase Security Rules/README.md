@@ -1,36 +1,36 @@
-# Firebase Secutiy Rules for REALTIME DB
+# Firebase REALTIME DB Security Rules
 
-### For User Specific Data Paths
-```console
-"rules": {
-	"users": {
-		"$uid": {
-			".read": "auth != null && auth.uid == $uid",
-			".write": "auth != null && auth.uid == $uid"
-		}
-	}
-}
-```
+- Limiting with UID
+  ```console
+  "rules": {
+  	"users": {
+  		"$uid": {
+  			".read": "auth != null && auth.uid == $uid",
+  			".write": "auth != null && auth.uid == $uid"
+  		}
+  	}
+  }
+  ```
 
-### For User Role Specific Data Paths
-```console
-"$pathname":{
-	".read": "auth != null && root.child('/userdata/'+auth.uid+'/userRole').exists()",
-	".write": "auth != null && root.child('/userdata/'+auth.uid+'/userRole').exists()"
-}
-```
+- Limiting with User Role EXISTS in DB
+  ```console
+  "$pathname":{
+  	".read": "auth != null && root.child('/userdata/'+auth.uid+'/userRole').exists()",
+  	".write": "auth != null && root.child('/userdata/'+auth.uid+'/userRole').exists()"
+  }
+  ```
 
-### For Super Admin Roles
-```console
-"userdata": {
-	"$userId": {
-		".write": "$userId === auth.uid || root.child('/userdata/'+auth.uid+'/userRole').val()=== 'superadmin'"
-	}
-}
-```
+- Limiting with User Role EQUALS in DB
+  ```console
+  "userdata": {
+  	"$userId": {
+  		".write": "$userId === auth.uid || root.child('/userdata/'+auth.uid+'/userRole').val()=== 'superadmin'"
+  	}
+  }
+  ```
 
-# Firebase Security Rules for STORAGE
-- Limiting with path specific
+# Firebase STORAGE Security Rules
+- Limiting with specific path
   ```console
   service firebase.storage {
     match /b/{bucket}/o {
@@ -45,8 +45,7 @@
     }
   }
   ```
-- Limiting with Write only
-  So that anyone can read the images, but only write if they are authenticated
+- Limiting with public READ, but limited WRITES
     ```console
     rules_version = '2';
     service firebase.storage {
@@ -79,7 +78,7 @@
     }
   }
   ```
-- Functions inside Security Rules - Storage
+- Limiting with custom Functions
   ```console
   service firebase.storage {
     match /b/{bucket}/o {
@@ -101,7 +100,7 @@
   }
   ```
 
-- Sepearte rules for create,update and delete
+- Limiting with seperate rules for create,update and delete
   ```console
   service firebase.storage {
     match /b/{bucket}/o {
