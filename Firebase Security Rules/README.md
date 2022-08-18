@@ -30,7 +30,32 @@
   ```
 
 # Firebase STORAGE Security Rules
-- Limiting with specific path
+
+- Limiting with specific paths: METHOD 1
+  - Giving specific access to specific paths
+  - Write the overall rule down below.
+  - If you write the `specific path` rule on `TOP`, It won't work
+
+  ```console
+  rules_version = '2';
+  service firebase.storage {
+    match /b/{bucket}/o {
+       // Explicitly define rules for the 'NewFolder' pattern
+      match /NewFolder/{allPaths}{
+        allow  write: if request.auth != null;
+        allow  read: if request.auth == null;
+      }
+      // This will be defined for everything else
+      match /{allPaths=**} {
+        allow  write: if request.auth != null;
+        allow  read: if request.auth != null;
+      }
+    }
+  }
+  ```
+
+- Limiting with specific path: METHOD 2
+  - Specific access to all the paths
   ```console
   service firebase.storage {
     match /b/{bucket}/o {
@@ -45,6 +70,7 @@
     }
   }
   ```
+
 - Limiting with public READ, but limited WRITES
     ```console
     rules_version = '2';
@@ -68,6 +94,7 @@
     }
   }
   ```
+
 - Limiting with custom claims
   ```console
   service firebase.storage {
@@ -78,6 +105,7 @@
     }
   }
   ```
+
 - Limiting with custom Functions
   ```console
   service firebase.storage {
