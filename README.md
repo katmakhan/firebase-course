@@ -38,9 +38,23 @@
   - Rules to minimise data extraction
 
  ---
- 
+ ### Installing Firebase CLI in Windows or MAC
+ ```bash
+ curl -sL https://firebase.tools | bash
+ ```
+- Then initialise by `firebase login` and add your service account
+```bash
+firebase login
+```
+- Then initialise the project by going inside the project folder and typing
+```bash
+firebase init
+```
+
+
  ### Installing Firebase-Admin in Python
- ```console
+
+ ```bash
  pip install firebase-admin
  ```
  
