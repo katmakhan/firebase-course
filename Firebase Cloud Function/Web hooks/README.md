@@ -14,3 +14,9 @@ firebase init emulators
 ```console
 firebase emulators:start
 ```
+
+### To Deploy
+- Cd functions - To get inside the functions folder
+- `npm install` - To install the dependencies
+- `cd..` - To get back to main folder
+- `firebase deploy` - To deploy the function to firebase
